@@ -1,0 +1,117 @@
+{
+  "name": "AutoParts_Simulation",
+  "nodes": [
+    {
+      "id": "1",
+      "name": "Start",
+      "type": "n8n-nodes-base.webhook",
+      "position": [
+        250,
+        300
+      ],
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "autoparts-test"
+      }
+    },
+    {
+      "id": "2",
+      "name": "VisionSim",
+      "type": "n8n-nodes-base.function",
+      "position": [
+        450,
+        300
+      ],
+      "parameters": {
+        "functionCode": "items[0].json.defect = Math.random() < 0.15; return items;"
+      }
+    },
+    {
+      "id": "3",
+      "name": "DefectCounter",
+      "type": "n8n-nodes-base.function",
+      "position": [
+        650,
+        300
+      ],
+      "parameters": {
+        "functionCode": "items[0].json.defect_count = items[0].json.defect ? 1 : 0; return items;"
+      }
+    },
+    {
+      "id": "4",
+      "name": "MaintenanceTrigger",
+      "type": "n8n-nodes-base.function",
+      "position": [
+        850,
+        300
+      ],
+      "parameters": {
+        "functionCode": "items[0].json.downtime = Math.random() < 0.05; return items;"
+      }
+    },
+    {
+      "id": "5",
+      "name": "Notifier",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1050,
+        300
+      ],
+      "parameters": {
+        "values": [
+          {
+            "name": "message",
+            "value": "={{ $json.defect ? 'Defect detected - triage' : 'No defect' }}"
+          }
+        ]
+      }
+    }
+  ],
+  "connections": {
+    "1": {
+      "main": [
+        [
+          {
+            "node": "2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "2": {
+      "main": [
+        [
+          {
+            "node": "3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "3": {
+      "main": [
+        [
+          {
+            "node": "4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "4": {
+      "main": [
+        [
+          {
+            "node": "5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

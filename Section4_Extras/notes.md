@@ -1,0 +1,2 @@
+- Place simulation link into Section2_CaseStudy/simulation_link.txt after importing workflow to n8n.
+- Use submit_instructions.md to push the repo to GitHub.

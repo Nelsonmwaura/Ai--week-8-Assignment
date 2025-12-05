@@ -1,0 +1,3 @@
+(400-800 words) Smart Manufacturing Implementation at AutoParts Inc.
+
+Deploy a combination of Quality Inspection, Predictive Maintenance, and Production Orchestrator agents. Pilot vision-based inspection on a single production line. Use edge inference for low-latency defect detection and shadow-mode to compare predictions against human inspection for 4 weeks. Implement telemetry collection for motors and bearings; train a time-series failure model and run scheduled maintenance windows triggered by the predictive agent. Integrate orchestrator with MES via REST or OPC-UA and use reinforcement learning for job sequencing over time. Calculate ROI from reduced defects, lower downtime, and fewer expedited shipments. Include retraining and worker retraining plans.
